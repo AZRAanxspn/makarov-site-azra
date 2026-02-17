@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея - Владимир Макаров</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Основные стили для галереи */
+        .page-header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, transparent 100%);
+                z-index: -1;
+            }
+
+        .page-title {
+            font-size: 3rem;
+            color: #8b0000;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+
+            .page-title::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, #8b0000, transparent);
+            }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Статистика галереи */
+        .gallery-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+            padding: 1.5rem;
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 12px;
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0 1.5rem;
+            border-right: 1px solid #333;
+        }
+
+            .stat-item:last-child {
+                border-right: none;
+            }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #b8860b;
+            font-family: 'Oswald', sans-serif;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Улучшенные фильтры */
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background-color: rgba(10, 10, 10, 0.9);
+            border-radius: 12px;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn {
+            background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            border: 1px solid #444;
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .filter-btn::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: radial-gradient(circle, rgba(139, 0, 0, 0.3) 0%, transparent 70%);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s, height 0.6s;
+            }
+
+            .filter-btn:hover {
+                transform: translateY(-3px);
+                border-color: #8b0000;
+                box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+            }
+
+                .filter-btn:hover::before {
+                    width: 300px;
+                    height: 300px;
+                }
+
+            .filter-btn.active {
+                background: linear-gradient(135deg, #8b0000 0%, #a30000 100%);
+                border-color: #8b0000;
+                box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+                transform: translateY(-2px);
+            }
+
+            .filter-btn i {
+                margin-right: 8px;
+                font-size: 1.1rem;
+            }
+
+        /* Улучшенная сетка галереи */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: itemAppear 0.6s forwards;
+        }
+
+        @keyframes itemAppear {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            border-color: #8b0000;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.9) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 1.5rem;
+            z-index: 2;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-info {
+            padding: 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-title {
+            color: #b8860b;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+            .gallery-title i {
+                color: #8b0000;
+                font-size: 1.2rem;
+                opacity: 0.7;
+            }
+
+        .gallery-description {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .gallery-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+        }
+
+        .gallery-category {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.2) 0%, rgba(184, 134, 11, 0.2) 100%);
+            color: #b8860b;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid rgba(184, 134, 11, 0.3);
+        }
+
+            .gallery-category i {
+                margin-right: 6px;
+                font-size: 0.9rem;
+            }
+
+        .image-size {
+            color: #777;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+            .image-size i {
+                margin-right: 5px;
+            }
+
+        /* Улучшенный лайтбокс */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+            .lightbox.active {
+                display: flex;
+                opacity: 1;
+            }
+
+        .lightbox-content {
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .lightbox-img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px 12px 0 0;
+            background: #111;
+        }
+
+        .lightbox-info {
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            padding: 2rem;
+            border-radius: 0 0 12px 12px;
+            border-top: 2px solid #8b0000;
+        }
+
+        .lightbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .lightbox-title {
+            color: #b8860b;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .lightbox-category {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(139, 0, 0, 0.2);
+            color: #8b0000;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            border: 1px solid #8b0000;
+        }
+
+        .lightbox-desc {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .lightbox-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: linear-gradient(135deg, #8b0000 0%, #a30000 100%);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .lightbox-close:hover {
+                transform: rotate(90deg) scale(1.1);
+                box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
+            }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+            pointer-events: none;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.8) 0%, rgba(184, 134, 11, 0.8) 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+            .lightbox-prev:hover,
+            .lightbox-next:hover {
+                transform: scale(1.1);
+                box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
+            }
+
+        .lightbox-prev {
+            transform: translateX(-20px);
+        }
+
+        .lightbox-next {
+            transform: translateX(20px);
+        }
+
+        .lightbox.active .lightbox-prev,
+        .lightbox.active .lightbox-next {
+            transform: translateX(0);
+        }
+
+        /* Кнопки действий в лайтбоксе */
+        .lightbox-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .lightbox-btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 1px solid #444;
+            transition: all 0.3s;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            .lightbox-btn:hover {
+                background: linear-gradient(135deg, #8b0000 0%, #a30000 100%);
+                border-color: #8b0000;
+                transform: translateY(-2px);
+            }
+
+            .lightbox-btn i {
+                margin-right: 8px;
+            }
+
+        /* Сообщение если нет результатов */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #777;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+            .no-results i {
+                font-size: 4rem;
+                margin-bottom: 1.5rem;
+                color: #444;
+            }
+
+            .no-results h3 {
+                color: #b0b0b0;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .no-results p {
+                font-size: 1.1rem;
+                max-width: 500px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+        /* Пагинация */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            padding: 1.5rem;
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        .page-btn {
+            background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            border: 1px solid #444;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+        }
+
+            .page-btn:hover:not(.disabled) {
+                background: linear-gradient(135deg, #8b0000 0%, #a30000 100%);
+                border-color: #8b0000;
+                transform: scale(1.1);
+            }
+
+            .page-btn.disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+            }
+
+        .page-numbers {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .page-number {
+            background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            border: 1px solid #444;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Oswald', sans-serif;
+        }
+
+            .page-number:hover,
+            .page-number.active {
+                background: linear-gradient(135deg, #8b0000 0%, #a30000 100%);
+                border-color: #8b0000;
+                transform: translateY(-2px);
+            }
+
+        /* Загрузка */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(139, 0, 0, 0.3);
+            border-top: 5px solid #8b0000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .gallery-controls {
+                top: 70px;
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-item {
+                padding: 0 1rem;
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .lightbox-content {
+                width: 95%;
+            }
+
+            .lightbox-prev,
+            .lightbox-next {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .gallery-title {
+                font-size: 1.2rem;
+            }
+
+            .lightbox-title {
+                font-size: 1.4rem;
+            }
+
+            .lightbox-actions {
+                flex-direction: column;
+            }
+
+            .lightbox-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Эффект параллакса для заголовка */
+        .parallax-title {
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+
+        /* Специальные эффекты для изображений */
+        .premium-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #b8860b 0%, #daa520 100%);
+            color: #111;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 3;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Эффект наведения для премиум изображений */
+        .gallery-item.premium:hover {
+            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.3);
+            border-color: #b8860b;
+        }
+
+        /* Анимация для счетчика изображений */
+        .counter-animation {
+            animation: countUp 1s ease-out;
+        }
+
+        @keyframes countUp {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Эффект свечения для активных элементов */
+        .glow-effect {
+            position: relative;
+        }
+
+            .glow-effect::after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                background: linear-gradient(45deg, #8b0000, #b8860b, #8b0000);
+                border-radius: 14px;
+                z-index: -1;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .glow-effect.active::after {
+                opacity: 0.5;
+                animation: glow 2s infinite;
+            }
+
+        @keyframes glow {
+            0%, 100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><span class="accent">ВЛАДИМИР</span> МАКАРОВ</h1>
+                <p class="subtitle">Антология Антагониста</p>
+            </div>
+
+            <!-- Навигация -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="dossier.html"><i class="fas fa-file-alt"></i> Досье</a></li>
+                    <li><a href="biography.html"><i class="fas fa-book"></i> Биография</a></li>
+                    <li><a href="gallery.html" class="active"><i class="fas fa-images"></i> Галерея</a></li>
+                    <li><a href="trivia.html"><i class="fas fa-info-circle"></i> Мелочи</a></li>
+                    <li><a href="media.html"><i class="fas fa-video"></i> В медиа</a></li>
+                    <li><a href="about.html"><i class="fas fa-question-circle"></i> О проекте</a></li>
+                </ul>
+            </nav>
+
+            <!-- Мобильное меню -->
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Индикатор загрузки -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Заголовок страницы с параллакс-эффектом -->
+            <section class="page-header" id="pageHeader">
+                <h1 class="page-title parallax-title" id="parallaxTitle">ГАЛЕРЕЯ</h1>
+                <p class="page-subtitle">Эксклюзивная коллекция изображений Владимира Макарова. От концепт-артов до культовых моментов из игры.</p>
+            </section>
+
+            <!-- Статистика галереи -->
+            <div class="gallery-stats">
+                <div class="stat-item">
+                    <span class="stat-number counter-animation" id="totalImages">24</span>
+                    <span class="stat-label">Изображений</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number counter-animation" id="uniqueCategories">5</span>
+                    <span class="stat-label">Категорий</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number counter-animation" id="premiumCount">8</span>
+                    <span class="stat-label">Эксклюзивов</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number counter-animation" id="totalSize">156</span>
+                    <span class="stat-label">МБ контента</span>
+                </div>
+            </div>
+
+            <!-- Фильтры галереи -->
+            <div class="gallery-controls">
+                <button class="filter-btn active glow-effect" data-filter="all">
+                    <i class="fas fa-layer-group"></i> Все
+                </button>
+                <button class="filter-btn glow-effect" data-filter="character">
+                    <i class="fas fa-user"></i> Персонаж
+                </button>
+                <button class="filter-btn glow-effect" data-filter="missions">
+                    <i class="fas fa-crosshairs"></i> Операции
+                </button>
+                <button class="filter-btn glow-effect" data-filter="symbols">
+                    <i class="fas fa-flag"></i> Символика
+                </button>
+                <button class="filter-btn glow-effect" data-filter="concept">
+                    <i class="fas fa-paint-brush"></i> Концепты
+                </button>
+                <button class="filter-btn glow-effect" data-filter="premium">
+                    <i class="fas fa-crown"></i> Эксклюзивы
+                </button>
+                <button class="filter-btn glow-effect" data-filter="fanart">
+                    <i class="fas fa-palette"></i> Фан-арт
+                </button>
+            </div>
+
+            <!-- Контейнер для галереи -->
+            <div class="gallery-grid" id="galleryContainer">
+                <!-- Изображения будут добавлены через JavaScript -->
+            </div>
+
+            <!-- Пагинация -->
+            <div class="pagination" id="pagination">
+                <button class="page-btn prev disabled" id="prevPage">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="page-numbers" id="pageNumbers">
+                    <!-- Номера страниц будут добавлены через JavaScript -->
+                </div>
+
+                <button class="page-btn next" id="nextPage">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Сообщение если нет результатов -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search"></i>
+                <h3>Изображения не найдены</h3>
+                <p>Попробуйте выбрать другую категорию или сбросить фильтры</p>
+                <button class="filter-btn" data-filter="all" style="margin-top: 1.5rem;">
+                    <i class="fas fa-redo"></i> Сбросить фильтры
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Улучшенный лайтбокс -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="lightbox-nav">
+            <button class="lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="lightbox-content">
+            <div class="lightbox-image-container">
+                <img src="" alt="" class="lightbox-img" id="lightboxImg">
+                <div class="premium-badge" id="lightboxBadge" style="display: none;">
+                    <i class="fas fa-crown"></i> ЭКСКЛЮЗИВ
+                </div>
+            </div>
+            <div class="lightbox-info">
+                <div class="lightbox-header">
+                    <div>
+                        <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                        <div id="lightboxCategory"></div>
+                    </div>
+                    <div class="image-size" id="lightboxSize">
+                        <i class="fas fa-weight-hanging"></i> <span id="sizeValue"></span> МБ
+                    </div>
+                </div>
+                <p class="lightbox-desc" id="lightboxDesc"></p>
+
+                <div class="lightbox-meta">
+                    <div>
+                        <i class="far fa-calendar"></i> Дата: <span id="lightboxDate"></span>
+                    </div>
+                    <div>
+                        <i class="fas fa-expand-arrows-alt"></i> Разрешение: <span id="lightboxResolution"></span>
+                    </div>
+                </div>
+
+                <div class="lightbox-actions">
+                    <a href="#" class="lightbox-btn" id="lightboxDownload" download>
+                        <i class="fas fa-download"></i> Скачать
+                    </a>
+                    <a href="#" class="lightbox-btn" id="lightboxShare" target="_blank">
+                        <i class="fas fa-share-alt"></i> Поделиться
+                    </a>
+                    <button class="lightbox-btn" id="lightboxFavorite">
+                        <i class="far fa-heart"></i> В избранное
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>ВЛАДИМИР МАКАРОВ</h3>
+                    <p>Фан-сайт по вселенной Call of Duty</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="dossier.html">Досье</a></li>
+                        <li><a href="biography.html">Биография</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="trivia.html">Мелочи</a></li>
+                        <li><a href="media.html">В медиа</a></li>
+                        <li><a href="about.html">О проекте</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-disclaimer">
+                    <h4>Юридическое уведомление</h4>
+                    <p>© Фан-сайт по вселенной Call of Duty. Все права на персонажа принадлежат Activision Publishing, Inc. Неофициальный ресурс, созданный для образовательных целей.</p>
+                    <p class="copyright">© 2023 Фан-сайт "Владимир Макаров". Все права на контент вселенной принадлежат правообладателям.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Усовершенствованная галерея с расширенным функционалом
+        document.addEventListener('DOMContentLoaded', function () {
+            // Элементы DOM
+            const galleryContainer = document.getElementById('galleryContainer');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const noResults = document.getElementById('noResults');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const lightboxDesc = document.getElementById('lightboxDesc');
+            const lightboxCategory = document.getElementById('lightboxCategory');
+            const lightboxDownload = document.getElementById('lightboxDownload');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const lightboxBadge = document.getElementById('lightboxBadge');
+            const lightboxSize = document.getElementById('sizeValue');
+            const lightboxDate = document.getElementById('lightboxDate');
+            const lightboxResolution = document.getElementById('lightboxResolution');
+            const lightboxShare = document.getElementById('lightboxShare');
+            const lightboxFavorite = document.getElementById('lightboxFavorite');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const prevPage = document.getElementById('prevPage');
+            const nextPage = document.getElementById('nextPage');
+            const pageNumbers = document.getElementById('pageNumbers');
+            const parallaxTitle = document.getElementById('parallaxTitle');
+            const pageHeader = document.getElementById('pageHeader');
+
+            // Статистические элементы
+            const totalImages = document.getElementById('totalImages');
+            const uniqueCategories = document.getElementById('uniqueCategories');
+            const premiumCount = document.getElementById('premiumCount');
+            const totalSize = document.getElementById('totalSize');
+
+            // Данные для галереи (расширенный набор)
+            const galleryImages = [
+                {
+                    id: 1,
+                    src: "assets/images/makarov1.jpg",
+                    title: "Владимир Макаров | Официальный арт",
+                    description: "Основное изображение персонажа из Modern Warfare III. Лидер ультранационалистов в полном тактическом обмундировании с элементами камуфляжа.",
+                    category: "character",
+                    size: "4.2",
+                    date: "10.11.2023",
+                    resolution: "1920x1080",
+                    premium: true,
+                    featured: true,
+                    tags: ["официальный", "арт", "тактика"]
+                },
+                {
+                    id: 2,
+                    src: "assets/images/makarov2.jpg",
+                    title: "Командир 'Конни Груп'",
+                    description: "Макаров в роли командира частной военной компании. Холодный и расчётливый взгляд, демонстрирующий его лидерские качества.",
+                    category: "character",
+                    size: "3.8",
+                    date: "15.11.2023",
+                    resolution: "1920x1080",
+                    premium: false,
+                    tags: ["командир", "чвк", "лидер"]
+                },
+                {
+                    id: 3,
+                    src: "assets/images/makarov3.jpg",
+                    title: "В тюрьме 'Зордая' | Предпобег",
+                    description: "Изображение Макарова во время заключения в тюремном комплексе 'Зордая' перед дерзким побегом. Видна решимость в глазах.",
+                    category: "character",
+                    size: "5.1",
+                    date: "05.11.2023",
+                    resolution: "2560x1440",
+                    premium: true,
+                    tags: ["тюрьма", "побег", "драма"]
+                },
+                {
+                    id: 4,
+                    src: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Операция 'Аль-Мазра'",
+                    description: "Силы 'Конни' во время операции по защите химического оружия в обсерватории Зая. Напряжённая атмосфера боевых действий.",
+                    category: "missions",
+                    size: "6.3",
+                    date: "12.11.2023",
+                    resolution: "3840x2160",
+                    premium: false,
+                    tags: ["операция", "битва", "химическое оружие"]
+                },
+                {
+                    id: 5,
+                    src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Побег из 'Зордаи' | Тактический штурм",
+                    description: "Дерзкий побег Макарова из тюремного комплекса с помощью группы 'Конни'. Тактический штурм и координация действий.",
+                    category: "missions",
+                    size: "7.2",
+                    date: "10.11.2023",
+                    resolution: "3840x2160",
+                    premium: true,
+                    tags: ["побег", "штурм", "координация"]
+                },
+                {
+                    id: 6,
+                    src: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Угон рейса 761 | Теракт в небе",
+                    description: "Теракт в небе: угон пассажирского самолёта под видом сил Урзикстана. Кульминационный момент операции.",
+                    category: "missions",
+                    size: "5.8",
+                    date: "11.11.2023",
+                    resolution: "1920x1080",
+                    premium: false,
+                    tags: ["угон", "теракт", "самолёт"]
+                },
+                {
+                    id: 7,
+                    src: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Тоннель под Ла-Маншем | Финальная битва",
+                    description: "Установка 'грязных бомб' в тоннеле под Ла-Маншем. Последняя известная операция Макарова и схватка с Прайсом.",
+                    category: "missions",
+                    size: "8.1",
+                    date: "21.11.2023",
+                    resolution: "3840x2160",
+                    premium: true,
+                    tags: ["тоннель", "битва", "финал"]
+                },
+                {
+                    id: 8,
+                    src: "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Логотип 'Конни Груп' | Эмблема",
+                    description: "Официальная эмблема частной военной компании 'Конни Груп', возглавляемой Макаровым. Символизирует мощь и профессионализм.",
+                    category: "symbols",
+                    size: "2.4",
+                    date: "01.11.2023",
+                    resolution: "1080x1080",
+                    premium: false,
+                    tags: ["логотип", "эмблема", "символ"]
+                },
+                {
+                    id: 9,
+                    src: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Ультранационалисты | Идеология",
+                    description: "Флаг и символика ультранационалистического движения, лидером которого является Макаров. Отражение идеологической основы.",
+                    category: "symbols",
+                    size: "3.1",
+                    date: "25.10.2023",
+                    resolution: "1920x1080",
+                    premium: false,
+                    tags: ["флаг", "идеология", "движение"]
+                },
+                {
+                    id: 10,
+                    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Противоборство с Прайсом | Противостояние",
+                    description: "Кульминационная схватка Макарова с капитаном Джоном Прайсом в тоннеле под Ла-Маншем. Столкновение идеологий.",
+                    category: "missions",
+                    size: "9.2",
+                    date: "21.11.2023",
+                    resolution: "3840x2160",
+                    premium: true,
+                    tags: ["прайс", "противостояние", "схватка"]
+                },
+                {
+                    id: 11,
+                    src: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Концепт-арт (ранний этап)",
+                    description: "Ранние концептуальные изображения персонажа Владимира Макарова для Modern Warfare III. Показывает эволюцию дизайна.",
+                    category: "concept",
+                    size: "4.5",
+                    date: "15.06.2023",
+                    resolution: "1920x1080",
+                    premium: true,
+                    tags: ["концепт", "ранний", "дизайн"]
+                },
+                {
+                    id: 12,
+                    src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Концепт-арт (финальный вариант)",
+                    description: "Финальные концепт-арты, утверждённые для игры. Отображает полную эволюцию дизайна персонажа от идеи до реализации.",
+                    category: "concept",
+                    size: "5.7",
+                    date: "30.07.2023",
+                    resolution: "2560x1440",
+                    premium: false,
+                    tags: ["концепт", "финал", "утверждённый"]
+                },
+                {
+                    id: 13,
+                    src: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Кинематографичный кадр | Драма",
+                    description: "Изображение из внутриигрового ролика, демонстрирующее харизму и жестокость персонажа в ключевой сюжетный момент.",
+                    category: "character",
+                    size: "6.8",
+                    date: "18.11.2023",
+                    resolution: "3840x2160",
+                    premium: false,
+                    tags: ["кинематографика", "драма", "сюжет"]
+                },
+                {
+                    id: 14,
+                    src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Арсенал Макарова | Вооружение",
+                    description: "Тактическое вооружение, предпочитаемое Макаровым и его бойцами из 'Конни'. Современное и эффективное.",
+                    category: "symbols",
+                    size: "3.9",
+                    date: "08.11.2023",
+                    resolution: "1920x1080",
+                    premium: false,
+                    tags: ["оружие", "арсенал", "вооружение"]
+                },
+                {
+                    id: 15,
+                    src: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Фан-арт: Пропагандистский плакат",
+                    description: "Фан-арт в виде пропагандистского плаката с изображением Макарова как лидера ультранационалистов. Создан сообществом.",
+                    category: "fanart",
+                    size: "4.2",
+                    date: "25.11.2023",
+                    resolution: "1920x1080",
+                    premium: false,
+                    tags: ["фан-арт", "плакат", "пропаганда"]
+                },
+                {
+                    id: 16,
+                    src: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Эксклюзив: Макаров в гражданском",
+                    description: "Редкое изображение Макарова в гражданской одежде. Показывает его способность сливаться с толпой и действовать скрытно.",
+                    category: "premium",
+                    size: "5.6",
+                    date: "03.12.2023",
+                    resolution: "2560x1440",
+                    premium: true,
+                    tags: ["эксклюзив", "гражданское", "скрытность"]
+                },
+                {
+                    id: 17,
+                    src: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Эксклюзив: Молодой Макаров",
+                    description: "Изображение молодого Макарова в начале его военной карьеры. Показывает формирование будущего лидера.",
+                    category: "premium",
+                    size: "6.3",
+                    date: "05.12.2023",
+                    resolution: "3840x2160",
+                    premium: true,
+                    tags: ["эксклюзив", "молодой", "прошлое"]
+                },
+                {
+                    id: 18,
+                    src: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Фан-арт: Диптих 'Лидер и Враг'",
+                    description: "Художественный диптих, изображающий Макарова как лидера для своих и как врага для мира. Создан талантливым фанатом.",
+                    category: "fanart",
+                    size: "7.1",
+                    date: "28.11.2023",
+                    resolution: "3840x2160",
+                    premium: true,
+                    tags: ["фан-арт", "диптих", "искусство"]
+                },
+                {
+                    id: 19,
+                    src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Символика: Знак ультранационалистов",
+                    description: "Детализированное изображение знака ультранационалистического движения. Символ идеологии и принадлежности.",
+                    category: "symbols",
+                    size: "2.8",
+                    date: "20.10.2023",
+                    resolution: "1080x1080",
+                    premium: false,
+                    tags: ["символ", "знак", "принадлежность"]
+                },
+                {
+                    id: 20,
+                    src: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                    title: "Концепт: Альтернативный дизайн",
+                    description: "Альтернативные варианты дизайна персонажа, которые не вошли в финальную версию. Интересные концептуальные решения.",
+                    category: "concept",
+                    size: "4.9",
+                    date: "22.07.2023",
+                    resolution: "1920x1080",
+                    premium: true,
+                    tags: ["концепт", "альтернатива", "дизайн"]
+                }
+            ];
+
+            // Настройки пагинации
+            const itemsPerPage = 8;
+            let currentPage = 1;
+            let currentFilter = 'all';
+            let currentImageIndex = 0;
+            let filteredImages = [];
+            let totalPages = 0;
+            let favoriteImages = JSON.parse(localStorage.getItem('favoriteImages')) || [];
+
+            // Инициализация статистики
+            function initStatistics() {
+                totalImages.textContent = galleryImages.length;
+
+                const categories = [...new Set(galleryImages.map(img => img.category))];
+                uniqueCategories.textContent = categories.length;
+
+                const premiumImages = galleryImages.filter(img => img.premium);
+                premiumCount.textContent = premiumImages.length;
+
+                const totalSizeMB = galleryImages.reduce((sum, img) => sum + parseFloat(img.size), 0);
+                totalSize.textContent = Math.round(totalSizeMB);
+            }
+
+            // Функция для получения названия категории
+            function getCategoryName(category) {
+                const categories = {
+                    'all': 'Все изображения',
+                    'character': 'Персонаж',
+                    'missions': 'Операции',
+                    'symbols': 'Символика',
+                    'concept': 'Концепт-арт',
+                    'premium': 'Эксклюзивы',
+                    'fanart': 'Фан-арт'
+                };
+                return categories[category] || category;
+            }
+
+            // Функция для получения иконки категории
+            function getCategoryIcon(category) {
+                const icons = {
+                    'character': 'fas fa-user',
+                    'missions': 'fas fa-crosshairs',
+                    'symbols': 'fas fa-flag',
+                    'concept': 'fas fa-paint-brush',
+                    'premium': 'fas fa-crown',
+                    'fanart': 'fas fa-palette',
+                    'all': 'fas fa-layer-group'
+                };
+                return icons[category] || 'fas fa-image';
+            }
+
+            // Функция для отображения галереи
+            function renderGallery(images, page = 1) {
+                currentPage = page;
+                const startIndex = (page - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const pageImages = images.slice(startIndex, endIndex);
+
+                galleryContainer.innerHTML = '';
+
+                if (pageImages.length === 0) {
+                    noResults.style.display = 'block';
+                    galleryContainer.style.display = 'none';
+                    document.getElementById('pagination').style.display = 'none';
+                    return;
+                }
+
+                noResults.style.display = 'none';
+                galleryContainer.style.display = 'grid';
+                document.getElementById('pagination').style.display = 'flex';
+
+                pageImages.forEach((image, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = `gallery-item ${image.premium ? 'premium' : ''}`;
+                    galleryItem.dataset.id = image.id;
+                    galleryItem.dataset.category = image.category;
+                    galleryItem.dataset.index = startIndex + index;
+
+                    // Анимация появления с задержкой
+                    galleryItem.style.animationDelay = `${index * 0.1}s`;
+
+                    const isFavorite = favoriteImages.includes(image.id);
+
+                    galleryItem.innerHTML = `
+                            ${image.premium ? '<div class="premium-badge"><i class="fas fa-crown"></i> ЭКСКЛЮЗИВ</div>' : ''}
+                            <div class="image-container">
+                                <img src="${image.src}" alt="${image.title}" loading="lazy">
+                                <div class="image-overlay">
+                                    <div class="image-size">
+                                        <i class="fas fa-weight-hanging"></i> ${image.size} МБ
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gallery-info">
+                                <h3 class="gallery-title">
+                                    ${image.title}
+                                    <i class="fas fa-external-link-alt"></i>
+                                </h3>
+                                <p class="gallery-description">${image.description}</p>
+                                <div class="gallery-meta">
+                                    <span class="gallery-category">
+                                        <i class="${getCategoryIcon(image.category)}"></i> ${getCategoryName(image.category)}
+                                    </span>
+                                    <div class="image-size">
+                                        <i class="far fa-calendar"></i> ${image.date}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                    // Клик по изображению для открытия лайтбокса
+                    galleryItem.addEventListener('click', () => openLightbox(startIndex + index, images));
+
+                    galleryContainer.appendChild(galleryItem);
+
+                    // Предзагрузка изображения
+                    const img = new Image();
+                    img.src = image.src;
+                });
+
+                updatePagination(images.length, page);
+            }
+
+            // Функция для обновления пагинации
+            function updatePagination(totalItems, currentPage) {
+                totalPages = Math.ceil(totalItems / itemsPerPage);
+                pageNumbers.innerHTML = '';
+
+                // Показываем только 5 страниц вокруг текущей
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, currentPage + 2);
+
+                if (currentPage <= 3) {
+                    endPage = Math.min(5, totalPages);
+                }
+                if (currentPage >= totalPages - 2) {
+                    startPage = Math.max(1, totalPages - 4);
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageNumber = document.createElement('div');
+                    pageNumber.className = `page-number ${i === currentPage ? 'active' : ''}`;
+                    pageNumber.textContent = i;
+                    pageNumber.addEventListener('click', () => {
+                        if (i !== currentPage) {
+                            renderGallery(filteredImages, i);
+                            window.scrollTo({ top: galleryContainer.offsetTop - 100, behavior: 'smooth' });
+                        }
+                    });
+                    pageNumbers.appendChild(pageNumber);
+                }
+
+                // Кнопки предыдущая/следующая
+                prevPage.classList.toggle('disabled', currentPage === 1);
+                nextPage.classList.toggle('disabled', currentPage === totalPages);
+
+                prevPage.onclick = () => {
+                    if (currentPage > 1) {
+                        renderGallery(filteredImages, currentPage - 1);
+                        window.scrollTo({ top: galleryContainer.offsetTop - 100, behavior: 'smooth' });
+                    }
+                };
+
+                nextPage.onclick = () => {
+                    if (currentPage < totalPages) {
+                        renderGallery(filteredImages, currentPage + 1);
+                        window.scrollTo({ top: galleryContainer.offsetTop - 100, behavior: 'smooth' });
+                    }
+                };
+            }
+
+            // Функция для фильтрации изображений
+            function filterGallery(category) {
+                currentFilter = category;
+                currentPage = 1;
+
+                loadingSpinner.style.display = 'block';
+
+                // Имитация загрузки для лучшего UX
+                setTimeout(() => {
+                    if (category === 'all') {
+                        filteredImages = [...galleryImages];
+                    } else if (category === 'premium') {
+                        filteredImages = galleryImages.filter(img => img.premium);
+                    } else {
+                        filteredImages = galleryImages.filter(img => img.category === category);
+                    }
+
+                    renderGallery(filteredImages, 1);
+                    loadingSpinner.style.display = 'none';
+
+                    // Обновляем активную кнопку фильтра
+                    filterButtons.forEach(btn => {
+                        if (btn.dataset.filter === category) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+
+                    // Обновляем статистику для фильтра
+                    updateFilterStats(category);
+                }, 500);
+            }
+
+            // Функция для обновления статистики фильтра
+            function updateFilterStats(category) {
+                let filtered = [];
+                if (category === 'all') {
+                    filtered = galleryImages;
+                } else if (category === 'premium') {
+                    filtered = galleryImages.filter(img => img.premium);
+                } else {
+                    filtered = galleryImages.filter(img => img.category === category);
+                }
+
+                totalImages.textContent = filtered.length;
+                totalImages.classList.add('counter-animation');
+
+                const categories = [...new Set(filtered.map(img => img.category))];
+                uniqueCategories.textContent = categories.length;
+                uniqueCategories.classList.add('counter-animation');
+
+                const premiumImages = filtered.filter(img => img.premium);
+                premiumCount.textContent = premiumImages.length;
+                premiumCount.classList.add('counter-animation');
+
+                const totalSizeMB = filtered.reduce((sum, img) => sum + parseFloat(img.size), 0);
+                totalSize.textContent = Math.round(totalSizeMB);
+                totalSize.classList.add('counter-animation');
+
+                // Убираем класс анимации после завершения
+                setTimeout(() => {
+                    [totalImages, uniqueCategories, premiumCount, totalSize].forEach(el => {
+                        el.classList.remove('counter-animation');
+                    });
+                }, 1000);
+            }
+
+            // Функция для открытия лайтбокса
+            function openLightbox(index, images) {
+                currentImageIndex = index;
+                const image = images[index];
+
+                // Показываем индикатор загрузки
+                loadingSpinner.style.display = 'block';
+                lightboxImg.style.opacity = '0';
+
+                // Предзагрузка изображения
+                const img = new Image();
+                img.src = image.src;
+                img.onload = () => {
+                    lightboxImg.src = image.src;
+                    lightboxImg.alt = image.title;
+                    lightboxTitle.textContent = image.title;
+                    lightboxDesc.textContent = image.description;
+                    lightboxSize.textContent = image.size;
+                    lightboxDate.textContent = image.date;
+                    lightboxResolution.textContent = image.resolution;
+                    lightboxDownload.href = image.src;
+                    lightboxDownload.download = `makarov-${image.id}.jpg`;
+
+                    // Настройка кнопки "Поделиться"
+                    const shareText = `Посмотрите это изображение Владимира Макарова: ${image.title}`;
+                    const shareUrl = window.location.href;
+                    lightboxShare.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+
+                    // Настройка кнопки "В избранное"
+                    const isFavorite = favoriteImages.includes(image.id);
+                    lightboxFavorite.innerHTML = isFavorite
+                        ? '<i class="fas fa-heart"></i> В избранном'
+                        : '<i class="far fa-heart"></i> В избранное';
+                    lightboxFavorite.style.color = isFavorite ? '#8b0000' : '';
+
+                    // Категория в лайтбоксе
+                    lightboxCategory.innerHTML = `
+                            <span class="gallery-category">
+                                <i class="${getCategoryIcon(image.category)}"></i> ${getCategoryName(image.category)}
+                            </span>
+                        `;
+
+                    // Бейдж для премиум изображений
+                    lightboxBadge.style.display = image.premium ? 'block' : 'none';
+
+                    // Показываем лайтбокс после загрузки изображения
+                    setTimeout(() => {
+                        loadingSpinner.style.display = 'none';
+                        lightboxImg.style.opacity = '1';
+                        lightbox.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }, 300);
+                };
+
+                img.onerror = () => {
+                    loadingSpinner.style.display = 'none';
+                    lightboxImg.src = 'assets/images/makarov1.jpg'; // Fallback image
+                    lightboxImg.alt = 'Изображение не загрузилось';
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                };
+            }
+
+            // Функция для закрытия лайтбокса
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            // Функция для навигации по лайтбоксу
+            function navigateLightbox(direction) {
+                if (direction === 'prev') {
+                    currentImageIndex = currentImageIndex === 0 ? filteredImages.length - 1 : currentImageIndex - 1;
+                } else {
+                    currentImageIndex = currentImageIndex === filteredImages.length - 1 ? 0 : currentImageIndex + 1;
+                }
+
+                openLightbox(currentImageIndex, filteredImages);
+            }
+
+            // Функция для добавления/удаления из избранного
+            function toggleFavorite() {
+                const currentImage = filteredImages[currentImageIndex];
+                const imageId = currentImage.id;
+
+                if (favoriteImages.includes(imageId)) {
+                    // Удаляем из избранного
+                    favoriteImages = favoriteImages.filter(id => id !== imageId);
+                    lightboxFavorite.innerHTML = '<i class="far fa-heart"></i> В избранное';
+                    lightboxFavorite.style.color = '';
+                    showNotification('Удалено из избранного', 'info');
+                } else {
+                    // Добавляем в избранное
+                    favoriteImages.push(imageId);
+                    lightboxFavorite.innerHTML = '<i class="fas fa-heart"></i> В избранном';
+                    lightboxFavorite.style.color = '#8b0000';
+                    showNotification('Добавлено в избранное', 'success');
+                }
+
+                // Сохраняем в localStorage
+                localStorage.setItem('favoriteImages', JSON.stringify(favoriteImages));
+            }
+
+            // Функция для показа уведомлений
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                        <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                        ${message}
+                    `;
+                notification.style.cssText = `
+                        position: fixed;
+                        top: 100px;
+                        right: 20px;
+                        background: ${type === 'success' ? 'linear-gradient(135deg, #2d8b2d 0%, #3cb043 100%)' : 'linear-gradient(135deg, #1a1a1a 0%, #222 100%)'};
+                        color: white;
+                        padding: 1rem 1.5rem;
+                        border-radius: 8px;
+                        border: 1px solid ${type === 'success' ? '#2d8b2d' : '#333'};
+                        z-index: 3000;
+                        animation: slideIn 0.3s, fadeOut 0.3s 2.7s;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    `;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            // Параллакс эффект для заголовка
+            function initParallax() {
+                if (!pageHeader) return;
+
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.5;
+
+                    if (parallaxTitle) {
+                        parallaxTitle.style.transform = `translate3d(0, ${rate}px, 0)`;
+                    }
+                });
+
+                // Эффект при движении мыши
+                pageHeader.addEventListener('mousemove', (e) => {
+                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+
+                    if (parallaxTitle) {
+                        parallaxTitle.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                    }
+                });
+
+                pageHeader.addEventListener('mouseleave', () => {
+                    if (parallaxTitle) {
+                        parallaxTitle.style.transform = 'rotateY(0deg) rotateX(0deg)';
+                    }
+                });
+            }
+
+            // Инициализация эффекта свечения для кнопок
+            function initGlowEffects() {
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('mouseenter', function () {
+                        if (this.classList.contains('active')) {
+                            this.classList.add('glow-effect');
+                        }
+                    });
+
+                    btn.addEventListener('mouseleave', function () {
+                        this.classList.remove('glow-effect');
+                    });
+                });
+            }
+
+            // Обработчики событий
+            function initEventListeners() {
+                // Обработчики для кнопок фильтров
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        filterGallery(button.dataset.filter);
+                    });
+                });
+
+                // Обработчики для лайтбокса
+                lightboxClose.addEventListener('click', closeLightbox);
+                lightboxPrev.addEventListener('click', () => navigateLightbox('prev'));
+                lightboxNext.addEventListener('click', () => navigateLightbox('next'));
+                lightboxFavorite.addEventListener('click', toggleFavorite);
+
+                // Закрытие лайтбокса по клику на фон
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+
+                // Управление лайтбоксом с клавиатуры
+                document.addEventListener('keydown', (e) => {
+                    if (!lightbox.classList.contains('active')) return;
+
+                    switch (e.key) {
+                        case 'Escape':
+                            closeLightbox();
+                            break;
+                        case 'ArrowLeft':
+                            navigateLightbox('prev');
+                            break;
+                        case 'ArrowRight':
+                            navigateLightbox('next');
+                            break;
+                        case 'f':
+                        case 'F':
+                            toggleFavorite();
+                            break;
+                    }
+                });
+
+                // Поиск по галерее через Ctrl+F
+                document.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey && e.key === 'f') {
+                        e.preventDefault();
+                        document.getElementById('pageHeader').scrollIntoView({ behavior: 'smooth' });
+                        // В реальном проекте здесь можно добавить поле поиска
+                    }
+                });
+            }
+
+            // Инициализация
+            function init() {
+                initStatistics();
+                initParallax();
+                initGlowEffects();
+                initEventListeners();
+
+                // Инициализация галереи
+                filteredImages = [...galleryImages];
+                renderGallery(filteredImages, 1);
+
+                // Анимация для элементов статистики
+                setTimeout(() => {
+                    document.querySelectorAll('.counter-animation').forEach(el => {
+                        el.classList.remove('counter-animation');
+                    });
+                }, 1000);
+            }
+
+            // Запуск инициализации
+            init();
+        });
+    </script>
+
+    <style>
+        /* Дополнительные анимации */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Адаптивные стили для уведомлений */
+        @media (max-width: 768px) {
+            .notification {
+                top: 80px;
+                right: 10px;
+                left: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</body>
+</html>

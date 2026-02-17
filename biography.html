@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Биография - Владимир Макаров</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Стили для страницы биографии */
+        .page-header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: #8b0000;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            font-style: italic;
+        }
+
+        .bio-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 992px) {
+            .bio-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bio-content {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 2.5rem;
+            border: 1px solid #333;
+        }
+
+        .bio-sidebar {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid #333;
+            height: fit-content;
+        }
+
+        .bio-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+        }
+
+            .bio-section:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+
+        .bio-section-title {
+            color: #b8860b;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #8b0000;
+            display: flex;
+            align-items: center;
+        }
+
+            .bio-section-title i {
+                margin-right: 10px;
+                color: #8b0000;
+            }
+
+        .bio-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+            .bio-timeline::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background-color: #8b0000;
+            }
+
+        .bio-event {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px dashed #444;
+        }
+
+            .bio-event:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+
+            .bio-event::before {
+                content: '';
+                position: absolute;
+                left: -2.3rem;
+                top: 0;
+                width: 12px;
+                height: 12px;
+                background-color: #b8860b;
+                border-radius: 50%;
+                border: 2px solid #8b0000;
+            }
+
+        .event-date {
+            color: #b8860b;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-title {
+            color: #e0e0e0;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .character-card {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .character-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #8b0000;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+            .character-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .character-name {
+            color: #8b0000;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .character-title {
+            color: #b8860b;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-facts h3 {
+            color: #b8860b;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .fact-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+            .fact-item:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+
+        .fact-label {
+            color: #8b0000;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .fact-value {
+            color: #e0e0e0;
+        }
+
+        .key-quote {
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            border-left: 4px solid #8b0000;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+            .key-quote::before {
+                content: '"';
+                position: absolute;
+                top: -10px;
+                left: 10px;
+                font-size: 4rem;
+                color: rgba(139, 0, 0, 0.2);
+                font-family: serif;
+            }
+
+        .quote-text {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-author {
+            color: #b8860b;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .mission-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .mission-image {
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+            .mission-image:hover {
+                transform: scale(1.05);
+                border-color: #8b0000;
+            }
+
+            .mission-image img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                display: block;
+            }
+
+        .mission-caption {
+            padding: 0.5rem;
+            background-color: #222;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+
+        .enemies-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .enemy-card {
+            background-color: #222;
+            border-radius: 6px;
+            padding: 1rem;
+            border: 1px solid #444;
+            transition: border-color 0.3s;
+        }
+
+            .enemy-card:hover {
+                border-color: #8b0000;
+            }
+
+        .enemy-name {
+            color: #8b0000;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .enemy-role {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .status-alive {
+            background-color: rgba(45, 139, 45, 0.2);
+            color: #2d8b2d;
+            border: 1px solid #2d8b2d;
+        }
+
+        .status-dead {
+            background-color: rgba(139, 0, 0, 0.2);
+            color: #8b0000;
+            border: 1px solid #8b0000;
+        }
+
+        .status-unknown {
+            background-color: rgba(184, 134, 11, 0.2);
+            color: #b8860b;
+            border: 1px solid #b8860b;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            .nav-button:hover {
+                background-color: #8b0000;
+                border-color: #8b0000;
+                transform: translateY(-2px);
+            }
+
+            .nav-button i {
+                margin-right: 10px;
+            }
+
+            .nav-button.next {
+                margin-left: auto;
+            }
+
+            .nav-button.prev i {
+                margin-right: 10px;
+                margin-left: 0;
+            }
+
+            .nav-button.next i {
+                margin-left: 10px;
+                margin-right: 0;
+            }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><span class="accent">ВЛАДИМИР</span> МАКАРОВ</h1>
+                <p class="subtitle">Антология Антагониста</p>
+            </div>
+
+            <!-- Навигация -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="dossier.html"><i class="fas fa-file-alt"></i> Досье</a></li>
+                    <li><a href="biography.html" class="active"><i class="fas fa-book"></i> Биография</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-images"></i> Галерея</a></li>
+                    <li><a href="trivia.html"><i class="fas fa-info-circle"></i> Мелочи</a></li>
+                    <li><a href="media.html"><i class="fas fa-video"></i> В медиа</a></li>
+                    <li><a href="about.html"><i class="fas fa-question-circle"></i> О проекте</a></li>
+                </ul>
+            </nav>
+
+            <!-- Мобильное меню -->
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Заголовок страницы -->
+            <section class="page-header">
+                <h1 class="page-title">БИОГРАФИЯ</h1>
+                <p class="page-subtitle">Полная хронология событий и история персонажа</p>
+            </section>
+
+            <!-- Основной контент в двух колонках -->
+            <div class="bio-container">
+                <!-- Левая колонка - основное содержание -->
+                <div class="bio-content">
+                    <!-- Введение -->
+                    <div class="bio-section">
+                        <h2 class="bio-section-title"><i class="fas fa-user-secret"></i> ОБЗОР ПЕРСОНАЖА</h2>
+                        <p><strong>Владимир Макаров</strong> — главный антагонист шутера от первого лица 2023 года Call of Duty: Modern Warfare III, третьей части перезапущенной подсерии Modern Warfare. В настоящее время он является лидером ультранационалистов, а также командиром российской ЧВК «Конни Груп».</p>
+
+                        <p>Его роль исполняет актёр <strong>Юлиан Костов</strong>. Макаров представляет собой харизматичного, беспощадного и стратегически одарённого лидера, готового на любые жертвы для достижения своих целей по восстановлению российской военной мощи на мировой арене.</p>
+
+                        <div class="key-quote">
+                            <p class="quote-text">"Ты никогда не должен хоронить своих врагов заживо."</p>
+                            <p class="quote-author">— Владимир Макаров, перед убийством Соупа</p>
+                        </div>
+                    </div>
+
+                    <!-- Хронология событий -->
+                    <div class="bio-section">
+                        <h2 class="bio-section-title"><i class="fas fa-timeline"></i> ХРОНОЛОГИЯ СОБЫТИЙ</h2>
+
+                        <div class="bio-timeline">
+                            <!-- Август 2023 -->
+                            <div class="bio-event">
+                                <div class="event-date">АВГУСТ 2023</div>
+                                <h3 class="event-title">ОПЕРАЦИЯ В АЛЬ-МАЗРЕ</h3>
+                                <div class="event-description">
+                                    <p>Макаров отправляет силы «Конни» в Аль-Мазру, где они вынуждены обороняться от «Теневой компании», которая штурмует обсерваторию Зая, чтобы завладеть химическим оружием, хранящимся в её бункерной системе.</p>
+                                    <p>Во время операции бойцы «Теневой компании» находят одноразовые телефоны и используют их, чтобы подтвердить причастность Макарова, и решают навестить его в ГУЛАГе.</p>
+                                    <p>Несмотря на то, что «Тени» успешно уничтожили базу и захватили газ, Макарову удаётся внедрить в их ряды двух оперативников «Конни», Ивана и Нолана, и они захватывают один из вертолётов, на котором перевозят газ.</p>
+                                    <p>Услышав его голос на одноразовых телефонах, Шепард и Грейвс решают выследить Макарова.</p>
+                                </div>
+                            </div>
+
+                            <!-- 10 ноября 2023 -->
+                            <div class="bio-event">
+                                <div class="event-date">10 НОЯБРЯ 2023 (02:00)</div>
+                                <h3 class="event-title">ПОБЕГ ИЗ ТЮРЬМЫ "ЗОРДАЯ"</h3>
+                                <div class="event-description">
+                                    <p>С помощью ударной группы «Конни» под руководством Ивана Алексева и Андрея Нолана Макаров сбегает из тюремного комплекса «Зордая» и начинает стремительное завоевание.</p>
+                                    <p>В течение первых семи часов после побега из тюрьмы Макаров руководил многочисленными операциями по всему миру, в том числе:</p>
+                                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                        <li>Кража баллистических ракет у «Ультралевого фронта»</li>
+                                        <li>Сбор зарина на электростанции, ранее находившейся под контролем Романа Баркова</li>
+                                    </ul>
+                                    <p>Оперативному отряду 141 не удалось предотвратить ни одну из этих атак.</p>
+                                </div>
+                            </div>
+
+                            <!-- 11 ноября 2023 -->
+                            <div class="bio-event">
+                                <div class="event-date">11 НОЯБРЯ 2023 (19:30)</div>
+                                <h3 class="event-title">УГОН РЕЙСА 761</h3>
+                                <div class="event-description">
+                                    <p>Макаров вместе со своими подчинёнными садится на рейс 761 из Кастовии в Сочи, Россия, чтобы совершить угон самолёта под видом Сил освобождения Урзикстана.</p>
+                                    <p>Ветеран Сил освобождения Урзикстана Самара Джалал пытается остановить угон, но её вмешательство было предусмотрено планом Макарова.</p>
+                                    <p>Позже Джалал выводит из строя один из членов «Конни», а Макаров прикрепляет к её торсу пояс со взрывчаткой. Затем ячейка «Конни» быстро покидает самолёт на парашютах, за несколько секунд до того, как Джалал и остальные пассажиры погибают от взрыва бомбы.</p>
+                                    <p>Два часа спустя оперативники «Конни» оцепляют место крушения, чтобы подбросить улики и обвинить ULF, но их вовремя останавливают Фарах Карим и Алекс Келлер.</p>
+                                </div>
+                            </div>
+
+                            <!-- 13 ноября 2023 -->
+                            <div class="bio-event">
+                                <div class="event-date">13 НОЯБРЯ 2023</div>
+                                <h3 class="event-title">ПРЕДАТЕЛЬСТВО И БЕГСТВО</h3>
+                                <div class="event-description">
+                                    <p>Опасаясь, что Милена Романова могла выдать информацию о его убежище, Макаров покидает опорный пункт в Санкт-Петербурге и приказывает Андрею Нолану остаться и руководить операцией.</p>
+                                    <p>На случай непредвиденных обстоятельств Конни также захватывает генерала Шепарда и разрабатывает логистические планы по его отправке в ГУЛАГ.</p>
+                                    <p>Когда Андрей Нолан был задержан капитаном Джоном Прайсом и сержантом Кайлом «Газом» Гарриком, он предоставил им информацию, которая привела их в Сибирь и в конечном счёте заставила их ещё больше отклониться от цели.</p>
+                                </div>
+                            </div>
+
+                            <!-- 21 ноября 2023 -->
+                            <div class="bio-event">
+                                <div class="event-date">21 НОЯБРЯ 2023</div>
+                                <h3 class="event-title">ЛОНДОН. ОПЕРАЦИЯ В ТОННЕЛЕ</h3>
+                                <div class="event-description">
+                                    <p>Макаров и его люди прибывают в Лондон, чтобы встретиться с хакером, который предоставил им вирус «Троянский конь». Используя вирус, Макаров получает контроль над тоннелем под Ла-Маншем и закладывает в нём «грязные бомбы», планируя взорвать тоннель и вызвать радиоактивные осадки.</p>
+                                    <p>Позже между Конни и оперативной группой 141 в Тоннеле происходит перестрелка. Люди Макарова пытаются помешать капитану Прайсу и сержанту Джону «Соупу» Мактавишу обезвредить бомбы.</p>
+                                    <p>Когда Прайс и Соуп добираются до бомбы и начинают её обезвреживать, Макаров и его люди устраивают им засаду. Приказав своим людям отступить и оставить врагов ему, Макаров стреляет в Соупа и прижимает Прайса к земле, насмехаясь над ним и говоря, что тот «никогда не должен хоронить своих врагов заживо».</p>
+                                    <p>Соупу удаётся встать и ударить Макарова ножом в плечо, но Макаров убивает Соупа выстрелом в голову, к большому огорчению Прайса. Затем Макаров вынужден отступить, когда по ним открывают огонь другие члены «141», но ему удаётся сбежать.</p>
+                                </div>
+                            </div>
+
+                            <!-- Текущий статус -->
+                            <div class="bio-event">
+                                <div class="event-date">НАСТОЯЩЕЕ ВРЕМЯ</div>
+                                <h3 class="event-title">В БЕГАХ</h3>
+                                <div class="event-description">
+                                    <p><strong>Макаров по-прежнему на свободе;</strong> мстительная оперативная группа 141 разыскивает его за убийство Соупа.</p>
+                                    <p>Его текущее местоположение неизвестно, но разведданные указывают на то, что он продолжает планировать новые атаки, используя остатки сети «Конни» и ультранационалистов по всей Европе и Азии.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ключевые миссии -->
+                    <div class="bio-section">
+                        <h2 class="bio-section-title"><i class="fas fa-crosshairs"></i> КЛЮЧЕВЫЕ ОПЕРАЦИИ</h2>
+
+                        <div class="mission-gallery">
+                            <div class="mission-image">
+                                <img src="assets/images/makarov1.jpg" alt="Побег из Зордаи">
+                                <div class="mission-caption">Побег из Зордаи</div>
+                            </div>
+                            <div class="mission-image">
+                                <img src="assets/images/makarov2.jpg" alt="Угон рейса 761">
+                                <div class="mission-caption">Угон рейса 761</div>
+                            </div>
+                            <div class="mission-image">
+                                <img src="assets/images/makarov3.jpg" alt="Тоннель под Ла-Маншем">
+                                <div class="mission-caption">Тоннель под Ла-Маншем</div>
+                            </div>
+                            <div class="mission-image">
+                                <div style="width: 100%; height: 150px; background: linear-gradient(135deg, #222 0%, #444 100%); display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-radiation-alt" style="font-size: 3rem; color: #8b0000;"></i>
+                                </div>
+                                <div class="mission-caption">Химическое оружие</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка - сайдбар -->
+                <div class="bio-sidebar">
+                    <!-- Карточка персонажа -->
+                    <div class="character-card">
+                        <div class="character-image">
+                            <img src="assets/images/makarov1.jpg" alt="Владимир Макаров">
+                        </div>
+                        <h2 class="character-name">Владимир Макаров</h2>
+                        <p class="character-title">Лидер ультранационалистов</p>
+                        <div class="status-badge status-alive">В БЕГАХ</div>
+                    </div>
+
+                    <!-- Быстрые факты -->
+                    <div class="quick-facts">
+                        <h3><i class="fas fa-info-circle"></i> БЫСТРЫЕ ФАКТЫ</h3>
+
+                        <div class="fact-item">
+                            <span class="fact-label">СТАТУС:</span>
+                            <span class="fact-value">Активный, в розыске</span>
+                        </div>
+
+                        <div class="fact-item">
+                            <span class="fact-label">ПРИНАДЛЕЖНОСТЬ:</span>
+                            <span class="fact-value">Ультранационалисты, ЧВК "Конни"</span>
+                        </div>
+
+                        <div class="fact-item">
+                            <span class="fact-label">ЦЕЛЬ:</span>
+                            <span class="fact-value">Восстановление военной мощи России</span>
+                        </div>
+
+                        <div class="fact-item">
+                            <span class="fact-label">СПЕЦИАЛИЗАЦИЯ:</span>
+                            <span class="fact-value">Стратегия, терроризм, лидерство</span>
+                        </div>
+
+                        <div class="fact-item">
+                            <span class="fact-label">ГЛАВНЫЙ ВРАГ:</span>
+                            <span class="fact-value">Оперативная группа 141</span>
+                        </div>
+
+                        <div class="fact-item">
+                            <span class="fact-label">ЖЕРТВЫ:</span>
+                            <span class="fact-value">Сотни+ (включая Соупа)</span>
+                        </div>
+                    </div>
+
+                    <!-- Известные враги -->
+                    <div class="quick-facts" style="margin-top: 2rem;">
+                        <h3><i class="fas fa-skull-crossbones"></i> ИЗВЕСТНЫЕ ВРАГИ</h3>
+
+                        <div class="enemies-list">
+                            <div class="enemy-card">
+                                <div class="enemy-name">Джон Прайс</div>
+                                <div class="enemy-role">Капитан, ОГ 141</div>
+                                <div class="status-badge status-alive">В ЖИВЫХ</div>
+                            </div>
+
+                            <div class="enemy-card">
+                                <div class="enemy-name">Джон "Соуп" Мактавиш</div>
+                                <div class="enemy-role">Сержант, ОГ 141</div>
+                                <div class="status-badge status-dead">УБИТ</div>
+                            </div>
+
+                            <div class="enemy-card">
+                                <div class="enemy-name">Генерал Шепард</div>
+                                <div class="enemy-role">Командующий Теневой компании</div>
+                                <div class="status-badge status-unknown">В ПЛЕНУ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Цитата дня -->
+                    <div class="key-quote" style="margin-top: 2rem;">
+                        <p class="quote-text">"Война — это не солдаты и оружие. Война — это идея. И пока есть хоть один человек, готовый умереть за неё, война никогда не закончится."</p>
+                        <p class="quote-author">— Владимир Макаров</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Навигационные кнопки -->
+            <div class="nav-buttons">
+                <a href="dossier.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i> Досье
+                </a>
+                <a href="gallery.html" class="nav-button next">
+                    Галерея <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>ВЛАДИМИР МАКАРОВ</h3>
+                    <p>Фан-сайт по вселенной Call of Duty</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="dossier.html">Досье</a></li>
+                        <li><a href="biography.html">Биография</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="trivia.html">Мелочи</a></li>
+                        <li><a href="media.html">В медиа</a></li>
+                        <li><a href="about.html">О проекте</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-disclaimer">
+                    <h4>Юридическое уведомление</h4>
+                    <p>© Фан-сайт по вселенной Call of Duty. Все права на персонажа принадлежат Activision Publishing, Inc. Неофициальный ресурс, созданный для образовательных целей.</p>
+                    <p class="copyright">© 2023 Фан-сайт "Владимир Макаров". Все права на контент вселенной принадлежат правообладателям.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

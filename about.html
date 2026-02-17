@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О проекте - Владимир Макаров</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: #8b0000;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+        }
+
+        .about-section {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #333;
+        }
+
+            .about-section h2 {
+                color: #b8860b;
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 2px solid #8b0000;
+                display: flex;
+                align-items: center;
+            }
+
+                .about-section h2 i {
+                    margin-right: 10px;
+                    color: #8b0000;
+                }
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #222 0%, #2a2a2a 100%);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #8b0000;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            margin-top: 0.5rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background-color: #222;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #333;
+            transition: transform 0.3s;
+        }
+
+            .team-member:hover {
+                transform: translateY(-5px);
+            }
+
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b0000 0%, #b8860b 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .member-name {
+            color: #e0e0e0;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: #b8860b;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid #333;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+            .form-group label {
+                display: block;
+                color: #b0b0b0;
+                margin-bottom: 0.5rem;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #222;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #8b0000;
+            }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .form-submit:hover {
+                background-color: #a30000;
+            }
+
+        .disclaimer-box {
+            background: linear-gradient(135deg, #1a1a1a 0%, #111 100%);
+            border-left: 4px solid #8b0000;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+            .feature-list li {
+                padding: 0.8rem 0;
+                border-bottom: 1px solid #333;
+                color: #e0e0e0;
+                display: flex;
+                align-items: center;
+            }
+
+                .feature-list li:last-child {
+                    border-bottom: none;
+                }
+
+                .feature-list li i {
+                    color: #b8860b;
+                    margin-right: 10px;
+                }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            background-color: #222;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><span class="accent">ВЛАДИМИР</span> МАКАРОВ</h1>
+                <p class="subtitle">Антология Антагониста</p>
+            </div>
+
+            <!-- Навигация -->
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="dossier.html"><i class="fas fa-file-alt"></i> Досье</a></li>
+                    <li><a href="biography.html"><i class="fas fa-book"></i> Биография</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-images"></i> Галерея</a></li>
+                    <li><a href="trivia.html"><i class="fas fa-info-circle"></i> Мелочи</a></li>
+                    <li><a href="media.html"><i class="fas fa-video"></i> В медиа</a></li>
+                    <li><a href="about.html" class="active"><i class="fas fa-question-circle"></i> О проекте</a></li>
+                </ul>
+            </nav>
+
+            <!-- Мобильное меню -->
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Заголовок страницы -->
+            <section class="page-header">
+                <h1 class="page-title">О ПРОЕКТЕ</h1>
+                <p class="page-subtitle">Информация о фан-сайте Владимира Макарова</p>
+            </section>
+
+            <div class="about-content">
+                <!-- О проекте -->
+                <section class="about-section">
+                    <h2><i class="fas fa-info-circle"></i> О ПРОЕКТЕ</h2>
+                    <p><strong>Фан-сайт "Владимир Макаров: Антология Антагониста"</strong> — это некоммерческий проект, созданный поклонниками серии Call of Duty для систематизации информации о культовом антагонисте Владимире Макарове из перезапущенной трилогии Modern Warfare.</p>
+
+                    <p>Сайт был создан в рамках учебного проекта с целью изучения веб-разработки, HTML, CSS и JavaScript. Все материалы на сайте представлены в образовательных целях и для анализа персонажа как культурного феномена.</p>
+                </section>
+
+                <!-- Статистика проекта -->
+                <section class="about-section">
+                    <h2><i class="fas fa-chart-bar"></i> СТАТИСТИКА ПРОЕКТА</h2>
+                    <div class="project-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">7</div>
+                            <div class="stat-label">HTML страниц</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">1500+</div>
+                            <div class="stat-label">Строк кода</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Изображений</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Адаптивный дизайн</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Цели проекта -->
+                <section class="about-section">
+                    <h2><i class="fas fa-bullseye"></i> ЦЕЛИ ПРОЕКТА</h2>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Создание полной энциклопедии персонажа Владимира Макарова</li>
+                        <li><i class="fas fa-check"></i> Систематизация информации из игр Modern Warfare (2019-2023)</li>
+                        <li><i class="fas fa-check"></i> Изучение и практика современных веб-технологий</li>
+                        <li><i class="fas fa-check"></i> Создание тематического дизайна, соответствующего атмосфере игры</li>
+                        <li><i class="fas fa-check"></i> Демонстрация навыков вёрстки и frontend-разработки</li>
+                    </ul>
+                </section>
+
+                <!-- Технологии -->
+                <section class="about-section">
+                    <h2><i class="fas fa-code"></i> ИСПОЛЬЗУЕМЫЕ ТЕХНОЛОГИИ</h2>
+                    <p>При создании сайта были использованы следующие технологии:</p>
+
+                    <div class="tech-stack">
+                        <span class="tech-item">HTML5</span>
+                        <span class="tech-item">CSS3</span>
+                        <span class="tech-item">JavaScript (ES6+)</span>
+                        <span class="tech-item">Flexbox & Grid</span>
+                        <span class="tech-item">Google Fonts</span>
+                        <span class="tech-item">Font Awesome</span>
+                        <span class="tech-item">Responsive Design</span>
+                    </div>
+                </section>
+
+                <!-- Команда (виртуальная) -->
+                <section class="about-section">
+                    <h2><i class="fas fa-users"></i> КОМАНДА ПРОЕКТА</h2>
+                    <p>Сайт был создан одним разработчиком в рамках учебного задания:</p>
+
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-avatar">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
+                            <div class="member-name">Загорулько Анжелика Владимировна</div>
+                            <div class="member-role">Frontend разработчик</div>
+                            <p>HTML/CSS, JavaScript, дизайн</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Юридическое уведомление -->
+                <section class="about-section">
+                    <h2><i class="fas fa-balance-scale"></i> ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ</h2>
+                    <div class="disclaimer-box">
+                        <p><strong>ВАЖНО:</strong> Данный сайт является <strong>неофициальным фан-ресурсом</strong> и создан исключительно в образовательных целях.</p>
+
+                        <p>Все права на персонажа <strong>Владимира Макарова</strong>, вселенную <strong>Call of Duty</strong>, и связанные с ними материалы принадлежат <strong>Activision Publishing, Inc.</strong> и соответствующим правообладателям.</p>
+
+                        <p>Сайт не претендует на авторские права и не используется в коммерческих целях. Все материалы собраны из открытых источников и фанатских сообществ.</p>
+                    </div>
+                </section>
+
+                <!-- Контактная форма -->
+                <section class="about-section">
+                    <h2><i class="fas fa-envelope"></i> ОБРАТНАЯ СВЯЗЬ</h2>
+                    <p>Если у вас есть предложения по улучшению сайта или вы обнаружили ошибку, пожалуйста, напишите нам:</p>
+
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Ваше имя:</label>
+                                <input type="text" id="name" class="form-control" placeholder="Введите ваше имя">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" class="form-control" placeholder="Введите ваш email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Сообщение:</label>
+                                <textarea id="message" class="form-control" placeholder="Введите ваше сообщение..."></textarea>
+                            </div>
+
+                            <button type="submit" class="form-submit">Отправить сообщение</button>
+                        </form>
+                    </div>
+
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #777;">
+                        <i class="fas fa-info-circle"></i> Обратите внимание: форма обратной связи является демонстрационной и не отправляет реальные сообщения.
+                    </p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>ВЛАДИМИР МАКАРОВ</h3>
+                    <p>Фан-сайт по вселенной Call of Duty</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="dossier.html">Досье</a></li>
+                        <li><a href="biography.html">Биография</a></li>
+                        <li><a href="gallery.html">Галерея</a></li>
+                        <li><a href="trivia.html">Мелочи</a></li>
+                        <li><a href="media.html">В медиа</a></li>
+                        <li><a href="about.html">О проекте</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-disclaimer">
+                    <h4>Юридическое уведомление</h4>
+                    <p>© Фан-сайт по вселенной Call of Duty. Все права на персонажа принадлежат Activision Publishing, Inc. Неофициальный ресурс, созданный для образовательных целей.</p>
+                    <p class="copyright">© 2023 Фан-сайт "Владимир Макаров". Все права на контент вселенной принадлежат правообладателям.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Обработка формы обратной связи
+        document.addEventListener('DOMContentLoaded', function () {
+            const contactForm = document.getElementById('contactForm');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Получаем значения полей
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+
+                    // Простая валидация
+                    if (!name || !email || !message) {
+                        alert('Пожалуйста, заполните все поля формы.');
+                        return;
+                    }
+
+                    // В реальном проекте здесь был бы AJAX запрос на сервер
+                    alert('Спасибо за ваше сообщение! В реальном проекте оно было бы отправлено администратору сайта.');
+
+                    // Очищаем форму
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
