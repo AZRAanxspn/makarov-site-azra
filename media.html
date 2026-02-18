@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Стили для страницы "В медиа" - оставляем без изменений */
         .page-header {
             text-align: center;
             padding: 3rem 0 2rem;
@@ -91,6 +92,7 @@
             overflow: hidden;
             border: 1px solid #333;
             transition: transform 0.3s;
+            cursor: pointer;
         }
 
             .video-card:hover {
@@ -178,76 +180,31 @@
             font-size: 0.8rem;
         }
 
-        .audio-grid {
+        .media-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin: 2rem 0;
         }
 
-        .audio-card {
-            background-color: #1a1a1a;
+        .stat-card {
+            background-color: #222;
             border-radius: 8px;
             padding: 1.5rem;
+            text-align: center;
             border: 1px solid #333;
         }
 
-        .audio-title {
-            color: #b8860b;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8b0000;
+            font-family: 'Oswald', sans-serif;
         }
 
-        .audio-player {
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-
-        audio {
-            width: 100%;
-            height: 40px;
-        }
-
-        .audio-description {
+        .stat-label {
             color: #b0b0b0;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .interviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .interview-card {
-            background-color: #1a1a1a;
-            border-radius: 8px;
-            padding: 1.5rem;
-            border: 1px solid #333;
-        }
-
-        .interview-title {
-            color: #b8860b;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .interview-excerpt {
-            color: #b0b0b0;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .interview-source {
-            color: #777;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #333;
+            margin-top: 0.5rem;
         }
 
         .media-modal {
@@ -343,55 +300,6 @@
             .media-section-title:first-child {
                 margin-top: 0;
             }
-
-        .quote-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
-            border-left: 4px solid #8b0000;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .quote-text {
-            color: #e0e0e0;
-            font-size: 1.2rem;
-            line-height: 1.5;
-            font-style: italic;
-            margin-bottom: 0.5rem;
-        }
-
-        .quote-author {
-            color: #b8860b;
-            text-align: right;
-            font-weight: bold;
-        }
-
-        .media-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
-            background-color: #222;
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid #333;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #8b0000;
-            font-family: 'Oswald', sans-serif;
-        }
-
-        .stat-label {
-            color: #b0b0b0;
-            margin-top: 0.5rem;
-        }
     </style>
 </head>
 <body>
@@ -428,29 +336,17 @@
             <!-- Заголовок страницы -->
             <section class="page-header">
                 <h1 class="page-title">В МЕДИА</h1>
-                <p class="page-subtitle">Видео, аудио и интервью о Владимире Макарове</p>
+                <p class="page-subtitle">Видео и материалы о Владимире Макарове</p>
             </section>
-
-            <!-- Вкладки -->
-            <div class="media-tabs">
-                <button class="tab-btn active" data-tab="videos">Видео</button>
-                <button class="tab-btn" data-tab="audio">Аудио</button>
-                <button class="tab-btn" data-tab="interviews">Интервью</button>
-                <button class="tab-btn" data-tab="articles">Статьи</button>
-            </div>
 
             <!-- Статистика -->
             <div class="media-stats">
                 <div class="stat-card">
-                    <div class="stat-number">15+</div>
+                    <div class="stat-number">5+</div>
                     <div class="stat-label">Видео материалов</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">8+</div>
-                    <div class="stat-label">Часов контента</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">50K+</div>
+                    <div class="stat-number">500K+</div>
                     <div class="stat-label">Просмотров на YouTube</div>
                 </div>
                 <div class="stat-card">
@@ -459,226 +355,105 @@
                 </div>
             </div>
 
-            <!-- Вкладка Видео -->
+            <!-- Вкладка Видео (единственная активная) -->
             <div class="tab-content active" id="videos-tab">
-                <h2 class="media-section-title">Видеоматериалы</h2>
+                <h2 class="media-section-title">Видеоматериалы с Макаровым</h2>
 
                 <div class="videos-grid">
-                    <!-- Видео 1 -->
-                    <div class="video-card" data-video-id="dQw4w9WgXcQ" data-video-title="Представление персонажа">
+                    <!-- Видео 1: Все сцены Макарова -->
+                    <div class="video-card" data-video-id="CatVDHG6hNo" data-video-title="Все сцены Макарова | Modern Warfare 3 (2023) 4K">
                         <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Макаров представление">
+                            <img src="https://img.youtube.com/vi/CatVDHG6hNo/maxresdefault.jpg" alt="Все сцены Макарова Modern Warfare 3">
                             <div class="video-play">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <span class="video-duration">3:45</span>
+                            <span class="video-duration">~25 мин</span>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">Владимир Макаров: Представление персонажа</h3>
-                            <p class="video-description">Официальный трейлер представления персонажа Владимира Макарова в Call of Duty: Modern Warfare III.</p>
+                            <h3 class="video-title">Все сцены Макарова | Modern Warfare 3 (2023) 4K</h3>
+                            <p class="video-description">Все кат-сцены и ключевые моменты с Владимиром Макаровым в Call of Duty: Modern Warfare III (2023). Полная хронология появления персонажа.</p>
                             <div class="video-meta">
-                                <span><i class="far fa-calendar"></i> 10.11.2023</span>
-                                <span><i class="far fa-eye"></i> 250K просмотров</span>
+                                <span><i class="fab fa-youtube"></i> Gamer's Little Playground</span>
+                                <span><i class="far fa-eye"></i> 270K+ просмотров</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Видео 2 -->
-                    <div class="video-card" data-video-id="9bZkp7q19f0" data-video-title="Кинематографичный ролик">
+                    <!-- Видео 2: Трейлер-раскрытие Макарова -->
+                    <div class="video-card" data-video-id="mRLjrtX6Jes" data-video-title="Макаров - Официальный трейлер раскрытия">
                         <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg" alt="Кинематографичный ролик">
+                            <img src="https://img.youtube.com/vi/mRLjrtX6Jes/maxresdefault.jpg" alt="Makarov Reveal Trailer">
                             <div class="video-play">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <span class="video-duration">5:22</span>
+                            <span class="video-duration">2:30</span>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">Кинематографичный ролик: Путь Макарова</h3>
-                            <p class="video-description">Специальный кинематографичный ролик, демонстрирующий путь Макарова от солдата до лидера ультранационалистов.</p>
+                            <h3 class="video-title">Макаров - Официальный трейлер раскрытия</h3>
+                            <p class="video-description">Официальный трейлер, представляющий Владимира Макарова в Modern Warfare III. Возвращение легендарного антагониста.</p>
                             <div class="video-meta">
-                                <span><i class="far fa-calendar"></i> 15.11.2023</span>
-                                <span><i class="far fa-eye"></i> 180K просмотров</span>
+                                <span><i class="fab fa-youtube"></i> Call of Duty</span>
+                                <span><i class="far fa-eye"></i> 1.9M+ просмотров</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Видео 3 -->
-                    <div class="video-card" data-video-id="JGwWNGJdvx8" data-video-title="Геймплей с Макаровым">
+                    <!-- Видео 3: История Макарова -->
+                    <div class="video-card" data-video-id="DZNSOEVJtok" data-video-title="Владимир Макаров - Полная история персонажа">
                         <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/maxresdefault.jpg" alt="Геймплей">
+                            <img src="https://img.youtube.com/vi/DZNSOEVJtok/maxresdefault.jpg" alt="История Макарова">
                             <div class="video-play">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <span class="video-duration">12:45</span>
+                            <span class="video-duration">~15 мин</span>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">Геймплей: Миссия "Побег из Зордаи"</h3>
-                            <p class="video-description">Полный геймплей миссии с участием Макарова. Тактика, диалоги и ключевые моменты операции.</p>
+                            <h3 class="video-title">Владимир Макаров - Полная история персонажа</h3>
+                            <p class="video-description">Подробный разбор биографии, мотивации и роли Владимира Макарова в Modern Warfare III.</p>
                             <div class="video-meta">
-                                <span><i class="far fa-calendar"></i> 20.11.2023</span>
-                                <span><i class="far fa-eye"></i> 320K просмотров</span>
+                                <span><i class="fab fa-youtube"></i> MrShady</span>
+                                <span><i class="far fa-eye"></i> 100K+ просмотров</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Видео 4 -->
-                    <div class="video-card" data-video-id="BP7OC6ZMjgg" data-video-title="Анализ персонажа">
+                    <!-- Видео 4: Все кат-сцены Макарова -->
+                    <div class="video-card" data-video-id="1WzqYNJx2nY" data-video-title="Все кат-сцены Макарова | Modern Warfare 3">
                         <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/BP7OC6ZMjgg/maxresdefault.jpg" alt="Анализ персонажа">
+                            <img src="https://img.youtube.com/vi/1WzqYNJx2nY/maxresdefault.jpg" alt="Все кат-сцены Макарова">
                             <div class="video-play">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <span class="video-duration">25:30</span>
+                            <span class="video-duration">~30 мин</span>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">Глубокий анализ персонажа</h3>
-                            <p class="video-description">Детальный анализ мотивации, психологии и роли Макарова в сюжете Modern Warfare III.</p>
+                            <h3 class="video-title">Все кат-сцены Макарова | Modern Warfare 3</h3>
+                            <p class="video-description">Полное прохождение всех кат-сцен с участием Владимира Макарова в кампании Modern Warfare III.</p>
                             <div class="video-meta">
-                                <span><i class="far fa-calendar"></i> 25.11.2023</span>
-                                <span><i class="far fa-eye"></i> 95K просмотров</span>
+                                <span><i class="fab fa-youtube"></i> CPG BOSS</span>
+                                <span><i class="far fa-eye"></i> 50K+ просмотров</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Видео 5 -->
-                    <div class="video-card" data-video-id="k2qgadSvNyU" data-video-title="За кулисами">
+                    <!-- Видео 5: Смерть Соупа -->
+                    <div class="video-card" data-video-id="gudXodbzJ_s" data-video-title="Смерть Соупа | Сцена с Макаровым">
                         <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/k2qgadSvNyU/maxresdefault.jpg" alt="За кулисами">
+                            <img src="https://img.youtube.com/vi/gudXodbzJ_s/maxresdefault.jpg" alt="Смерть Соупа">
                             <div class="video-play">
                                 <i class="fas fa-play"></i>
                             </div>
-                            <span class="video-duration">8:15</span>
+                            <span class="video-duration">~5 мин</span>
                         </div>
                         <div class="video-info">
-                            <h3 class="video-title">За кулисами: Озвучка Макарова</h3>
-                            <p class="video-description">Эксклюзивное интервью с Юлианом Костовым - актёром, озвучившим Владимира Макарова.</p>
+                            <h3 class="video-title">Смерть Соупа | Сцена с Макаровым</h3>
+                            <p class="video-description">Ключевая сцена убийства Соупа Макаровым в тоннеле под Ла-Маншем. Эмоциональный момент кампании.</p>
                             <div class="video-meta">
-                                <span><i class="far fa-calendar"></i> 01.12.2023</span>
-                                <span><i class="far fa-eye"></i> 150K просмотров</span>
+                                <span><i class="fab fa-youtube"></i> CPG BOSS</span>
+                                <span><i class="far fa-eye"></i> 200K+ просмотров</span>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Видео 6 -->
-                    <div class="video-card" data-video-id="60ItHLz5WEA" data-video-title="Сравнение с оригиналом">
-                        <div class="video-thumbnail">
-                            <img src="https://img.youtube.com/vi/60ItHLz5WEA/maxresdefault.jpg" alt="Сравнение">
-                            <div class="video-play">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <span class="video-duration">18:40</span>
-                        </div>
-                        <div class="video-info">
-                            <h3 class="video-title">Сравнение: Макаров 2009 vs 2023</h3>
-                            <p class="video-description">Детальное сравнение оригинального Макарова из Modern Warfare 2 и перезапущенной версии.</p>
-                            <div class="video-meta">
-                                <span><i class="far fa-calendar"></i> 05.12.2023</span>
-                                <span><i class="far fa-eye"></i> 210K просмотров</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Вкладка Аудио -->
-            <div class="tab-content" id="audio-tab">
-                <h2 class="media-section-title">Аудиоматериалы</h2>
-
-                <div class="quote-card">
-                    <p class="quote-text">"Самые опасные враги - это те, кто верит, что они правы. Макаров не просто злодей, он фанатик своей идеи."</p>
-                    <p class="quote-author">— Юлиан Костов, актёр озвучки</p>
-                </div>
-
-                <div class="audio-grid">
-                    <!-- Аудио 1 -->
-                    <div class="audio-card">
-                        <h3 class="audio-title">Полные диалоги Макарова</h3>
-                        <div class="audio-player">
-                            <audio controls>
-                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                                Ваш браузер не поддерживает аудио элементы.
-                            </audio>
-                        </div>
-                        <p class="audio-description">Сборник всех реплик и диалогов Владимира Макарова из Modern Warfare III. Длительность: 45 минут.</p>
-                    </div>
-
-                    <!-- Аудио 2 -->
-                    <div class="audio-card">
-                        <h3 class="audio-title">Саундтрек тем Макарова</h3>
-                        <div class="audio-player">
-                            <audio controls>
-                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-                                Ваш браузер не поддерживает аудио элементы.
-                            </audio>
-                        </div>
-                        <p class="audio-description">Музыкальные темы, сопровождающие появление и действия Макарова в игре.</p>
-                    </div>
-
-                    <!-- Аудио 3 -->
-                    <div class="audio-card">
-                        <h3 class="audio-title">Анализ голоса персонажа</h3>
-                        <div class="audio-player">
-                            <audio controls>
-                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
-                                Ваш браузер не поддерживает аудио элементы.
-                            </audio>
-                        </div>
-                        <p class="audio-description">Подкаст с анализом голосовой актёрской работы Юлиана Костова.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Вкладка Интервью -->
-            <div class="tab-content" id="interviews-tab">
-                <h2 class="media-section-title">Интервью и статьи</h2>
-
-                <div class="interviews-grid">
-                    <!-- Интервью 1 -->
-                    <div class="interview-card">
-                        <h3 class="interview-title">Интервью с разработчиками</h3>
-                        <p class="interview-excerpt">"Мы хотели создать антагониста, который был бы не просто 'злодеем', а имел убедительную мотивацию. Макаров верит, что восстанавливает величие своей страны, и это делает его особенно опасным."</p>
-                        <div class="interview-source">
-                            <strong>Источник:</strong> Интервью с креативным директором Infinity Ward
-                        </div>
-                    </div>
-
-                    <!-- Интервью 2 -->
-                    <div class="interview-card">
-                        <h3 class="interview-title">Юлиан Костов об озвучке</h3>
-                        <p class="interview-excerpt">"Озвучивать Макарова было одновременно сложно и увлекательно. Нужно было передать не только жестокость, но и интеллект, харизму лидера, который ведёт за собой людей."</p>
-                        <div class="interview-source">
-                            <strong>Источник:</strong> GameSpot Exclusive Interview
-                        </div>
-                    </div>
-
-                    <!-- Интервью 3 -->
-                    <div class="interview-card">
-                        <h3 class="interview-title">Фанатская реакция</h3>
-                        <p class="interview-excerpt">"Персонаж вызвал неоднозначную реакцию. Некоторые фанаты оригинальной трилогии критикуют нового Макарова, в то время как другие ценят его как самостоятельного персонажа."</p>
-                        <div class="interview-source">
-                            <strong>Источник:</strong> Игровые медиа и форумы
-                        </div>
-                    </div>
-
-                    <!-- Интервью 4 -->
-                    <div class="interview-card">
-                        <h3 class="interview-title">Культурный анализ</h3>
-                        <p class="interview-excerpt">"Макаров представляет собой современный типаж 'патриота-экстремиста'. Его образ отражает реальные геополитические страхи и напряжение современного мира."</p>
-                        <div class="interview-source">
-                            <strong>Источник:</strong> Академический анализ игровых нарративов
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Вкладка Статьи -->
-            <div class="tab-content" id="articles-tab">
-                <h2 class="media-section-title">Статьи и аналитика</h2>
-
-                <div class="no-media">
-                    <i class="fas fa-newspaper" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                    <h3>Статьи готовятся к публикации</h3>
-                    <p>Раздел находится в разработке. Скоро здесь появятся аналитические статьи и обзоры.</p>
                 </div>
             </div>
         </div>
@@ -735,10 +510,8 @@
 
     <script src="script.js"></script>
     <script>
-        // Управление вкладками
+        // Функция для работы с видео и модальным окном
         document.addEventListener('DOMContentLoaded', function() {
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
             const videoCards = document.querySelectorAll('.video-card');
             const videoModal = document.getElementById('videoModal');
             const modalClose = document.getElementById('modalClose');
@@ -746,52 +519,39 @@
             const videoContainer = document.getElementById('videoContainer');
             const modalDescription = document.getElementById('modalDescription');
 
-            // Функция для переключения вкладок
-            function switchTab(tabId) {
-                // Скрываем все вкладки
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-
-                // Убираем активный класс у всех кнопок
-                tabButtons.forEach(button => {
-                    button.classList.remove('active');
-                });
-
-                // Показываем выбранную вкладку
-                document.getElementById(`${tabId}-tab`).classList.add('active');
-
-                // Активируем соответствующую кнопку
-                document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            // Функция для извлечения ID видео из атрибута data-video-id
+            function extractVideoId(videoId) {
+                // Если ID уже правильный (11 символов), возвращаем как есть
+                if (videoId && videoId.length === 11) {
+                    return videoId;
+                }
+                // Если это полная ссылка, пытаемся извлечь ID
+                const match = videoId.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^"&?\/\s]{11})/);
+                return match ? match[1] : videoId;
             }
-
-            // Обработчики для кнопок вкладок
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    switchTab(button.dataset.tab);
-                });
-            });
 
             // Обработчики для видео карточек
             videoCards.forEach(card => {
                 card.addEventListener('click', () => {
                     const videoId = card.dataset.videoId;
-                    const videoTitle = card.dataset.videoTitle;
+                    const videoTitle = card.querySelector('.video-title').textContent;
                     const videoDesc = card.querySelector('.video-description').textContent;
 
                     // Устанавливаем заголовок и описание
                     modalTitle.textContent = videoTitle;
                     modalDescription.textContent = videoDesc;
 
-                    // Вставляем YouTube iframe
-                    videoContainer.innerHTML = `
-                        <iframe
-                            src="https://www.youtube.com/embed/${videoId}?autoplay=1"
-                            title="${videoTitle}"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    `;
+                    // Очищаем предыдущее видео
+                    videoContainer.innerHTML = '';
+
+                    // Вставляем YouTube iframe с правильным ID
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                    iframe.title = videoTitle;
+                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
+                    
+                    videoContainer.appendChild(iframe);
 
                     // Показываем модальное окно
                     videoModal.classList.add('active');
@@ -805,10 +565,7 @@
                 document.body.style.overflow = 'auto';
 
                 // Останавливаем видео при закрытии
-                const iframe = videoContainer.querySelector('iframe');
-                if (iframe) {
-                    iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
-                }
+                videoContainer.innerHTML = '';
             });
 
             // Закрытие модального окна по клику на фон
@@ -816,12 +573,7 @@
                 if (e.target === videoModal) {
                     videoModal.classList.remove('active');
                     document.body.style.overflow = 'auto';
-
-                    // Останавливаем видео при закрытии
-                    const iframe = videoContainer.querySelector('iframe');
-                    if (iframe) {
-                        iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
-                    }
+                    videoContainer.innerHTML = '';
                 }
             });
 
@@ -830,17 +582,9 @@
                 if (e.key === 'Escape' && videoModal.classList.contains('active')) {
                     videoModal.classList.remove('active');
                     document.body.style.overflow = 'auto';
-
-                    // Останавливаем видео при закрытии
-                    const iframe = videoContainer.querySelector('iframe');
-                    if (iframe) {
-                        iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
-                    }
+                    videoContainer.innerHTML = '';
                 }
             });
-
-            // Инициализация первой вкладки
-            switchTab('videos');
         });
     </script>
 </body>
