@@ -10,13 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Стили для страницы "В медиа" - оставляем без изменений */
         .page-header {
             text-align: center;
             padding: 3rem 0 2rem;
             margin-bottom: 2rem;
         }
-
         .page-title {
             font-size: 2.5rem;
             color: #8b0000;
@@ -303,16 +301,14 @@
     </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
-    <header class="header">
+     <header class="header">
         <div class="container">
             <div class="logo">
                 <h1><span class="accent">ВЛАДИМИР</span> МАКАРОВ</h1>
                 <p class="subtitle">Антология Антагониста</p>
             </div>
 
-            <!-- Навигация -->
-            <nav class="nav">
+                     <nav class="nav">
                 <ul>
                     <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
                     <li><a href="dossier.html"><i class="fas fa-file-alt"></i> Досье</a></li>
@@ -324,8 +320,7 @@
                 </ul>
             </nav>
 
-            <!-- Мобильное меню -->
-            <div class="mobile-menu-btn">
+               <div class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -333,14 +328,12 @@
 
     <main class="main-content">
         <div class="container">
-            <!-- Заголовок страницы -->
-            <section class="page-header">
+               <section class="page-header">
                 <h1 class="page-title">В МЕДИА</h1>
                 <p class="page-subtitle">Видео и материалы о Владимире Макарове</p>
             </section>
 
-            <!-- Статистика -->
-            <div class="media-stats">
+                  <div class="media-stats">
                 <div class="stat-card">
                     <div class="stat-number">5+</div>
                     <div class="stat-label">Видео материалов</div>
@@ -355,13 +348,11 @@
                 </div>
             </div>
 
-            <!-- Вкладка Видео (единственная активная) -->
-            <div class="tab-content active" id="videos-tab">
+                  <div class="tab-content active" id="videos-tab">
                 <h2 class="media-section-title">Видеоматериалы с Макаровым</h2>
 
                 <div class="videos-grid">
-                    <!-- Видео 1: Все сцены Макарова -->
-                    <div class="video-card" data-video-id="CatVDHG6hNo" data-video-title="Все сцены Макарова | Modern Warfare 3 (2023) 4K">
+                            <div class="video-card" data-video-id="CatVDHG6hNo" data-video-title="Все сцены Макарова | Modern Warfare 3 (2023) 4K">
                         <div class="video-thumbnail">
                             <img src="https://img.youtube.com/vi/CatVDHG6hNo/maxresdefault.jpg" alt="Все сцены Макарова Modern Warfare 3">
                             <div class="video-play">
@@ -379,8 +370,7 @@
                         </div>
                     </div>
 
-                    <!-- Видео 2: Трейлер-раскрытие Макарова -->
-                    <div class="video-card" data-video-id="mRLjrtX6Jes" data-video-title="Макаров - Официальный трейлер раскрытия">
+                                <div class="video-card" data-video-id="mRLjrtX6Jes" data-video-title="Макаров - Официальный трейлер раскрытия">
                         <div class="video-thumbnail">
                             <img src="https://img.youtube.com/vi/mRLjrtX6Jes/maxresdefault.jpg" alt="Makarov Reveal Trailer">
                             <div class="video-play">
@@ -398,8 +388,7 @@
                         </div>
                     </div>
 
-                    <!-- Видео 3: История Макарова -->
-                    <div class="video-card" data-video-id="DZNSOEVJtok" data-video-title="Владимир Макаров - Полная история персонажа">
+                                     <div class="video-card" data-video-id="DZNSOEVJtok" data-video-title="Владимир Макаров - Полная история персонажа">
                         <div class="video-thumbnail">
                             <img src="https://img.youtube.com/vi/DZNSOEVJtok/maxresdefault.jpg" alt="История Макарова">
                             <div class="video-play">
@@ -417,8 +406,7 @@
                         </div>
                     </div>
 
-                    <!-- Видео 4: Все кат-сцены Макарова -->
-                    <div class="video-card" data-video-id="1WzqYNJx2nY" data-video-title="Все кат-сцены Макарова | Modern Warfare 3">
+                             <div class="video-card" data-video-id="1WzqYNJx2nY" data-video-title="Все кат-сцены Макарова | Modern Warfare 3">
                         <div class="video-thumbnail">
                             <img src="https://img.youtube.com/vi/1WzqYNJx2nY/maxresdefault.jpg" alt="Все кат-сцены Макарова">
                             <div class="video-play">
@@ -435,8 +423,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Видео 5: Смерть Соупа -->
                     <div class="video-card" data-video-id="gudXodbzJ_s" data-video-title="Смерть Соупа | Сцена с Макаровым">
                         <div class="video-thumbnail">
                             <img src="https://img.youtube.com/vi/gudXodbzJ_s/maxresdefault.jpg" alt="Смерть Соупа">
@@ -459,7 +445,6 @@
         </div>
     </main>
 
-    <!-- Модальное окно для видео -->
     <div class="media-modal" id="videoModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -477,7 +462,6 @@
         </div>
     </div>
 
-    <!-- Подвал сайта -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -530,8 +514,7 @@
                 return match ? match[1] : videoId;
             }
 
-            // Обработчики для видео карточек
-            videoCards.forEach(card => {
+                 videoCards.forEach(card => {
                 card.addEventListener('click', () => {
                     const videoId = card.dataset.videoId;
                     const videoTitle = card.querySelector('.video-title').textContent;
@@ -544,8 +527,7 @@
                     // Очищаем предыдущее видео
                     videoContainer.innerHTML = '';
 
-                    // Вставляем YouTube iframe с правильным ID
-                    const iframe = document.createElement('iframe');
+                                       const iframe = document.createElement('iframe');
                     iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
                     iframe.title = videoTitle;
                     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
@@ -553,23 +535,19 @@
                     
                     videoContainer.appendChild(iframe);
 
-                    // Показываем модальное окно
-                    videoModal.classList.add('active');
+                                   videoModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 });
             });
 
-            // Закрытие модального окна
-            modalClose.addEventListener('click', () => {
+                 modalClose.addEventListener('click', () => {
                 videoModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
 
-                // Останавливаем видео при закрытии
-                videoContainer.innerHTML = '';
+                          videoContainer.innerHTML = '';
             });
 
-            // Закрытие модального окна по клику на фон
-            videoModal.addEventListener('click', (e) => {
+              videoModal.addEventListener('click', (e) => {
                 if (e.target === videoModal) {
                     videoModal.classList.remove('active');
                     document.body.style.overflow = 'auto';
@@ -577,8 +555,7 @@
                 }
             });
 
-            // Закрытие модального окна по нажатию Escape
-            document.addEventListener('keydown', (e) => {
+               document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && videoModal.classList.contains('active')) {
                     videoModal.classList.remove('active');
                     document.body.style.overflow = 'auto';
