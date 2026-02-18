@@ -844,23 +844,24 @@
                 <h1 class="page-title parallax-title" id="parallaxTitle">ГАЛЕРЕЯ</h1>
                 <p class="page-subtitle">Коллекция изображений Владимира Макарова</p>
             </section>
-                    <div class="gallery-stats">
-                <div class="stat-item">
-                    <span class="stat-number counter-animation" id="totalImages">5</span>
-                    <span class="stat-label">Изображений</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number counter-animation" id="uniqueCategories">3</span>
-                    <span class="stat-label">Категорий</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number counter-animation" id="premiumCount">2</span>
-                    <span class="stat-label">Эксклюзивов</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number counter-animation" id="totalSize">25</span>
-                    <span class="stat-label">МБ контента</span>
-                </div>
+                 <div class="gallery-stats">
+    <div class="stat-item">
+        <span class="stat-number counter-animation" id="totalImages">8</span>
+        <span class="stat-label">Изображений</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number counter-animation" id="uniqueCategories">4</span>
+        <span class="stat-label">Категорий</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number counter-animation" id="premiumCount">3</span>
+        <span class="stat-label">Эксклюзивов</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number counter-animation" id="totalSize">37</span>
+        <span class="stat-label">МБ контента</span>
+    </div>
+</div>
             </div>
             <div class="gallery-controls">
                 <button class="filter-btn active glow-effect" data-filter="all">
@@ -1003,64 +1004,96 @@
             const premiumCount = document.getElementById('premiumCount');
             const totalSize = document.getElementById('totalSize');
 
-                     const galleryImages = [
-                {
-                    id: 1,
-                    src: "makarov1.jpg",
-                    title: "Владимир Макаров | Портрет",
-                    description: "Владимир Макаров - главный антагонист Call of Duty: Modern Warfare III. Лидер ультранационалистов.",
-                    category: "character",
-                    size: "5.2",
-                    date: "2023",
-                    resolution: "1920x1080",
-                    premium: true
-                },
-                {
-                    id: 2,
-                    src: "makarov6.jpg",
-                    title: "Командир 'Группы Конни'",
-                    description: "Макаров в роли командира частной военной компании 'Группы Конни'.",
-                    category: "character",
-                    size: "4.8",
-                    date: "2023",
-                    resolution: "1920x1080",
-                    premium: false
-                },
-                {
-                    id: 3,
-                    src: "makarov7.jpg",
-                    title: "Макаров'",
-                    description: "Изображение Макарова'.",
-                    category: "character",
-                    size: "5.1",
-                    date: "2023",
-                    resolution: "1920x1080",
-                    premium: true
-                },
-                {
-                    id: 4,
-                    src: "makarov5.jpg",
-                    title: "Тактический командир",
-                    description: "Макаров в тактическом обмундировании, готовый к операции.",
-                    category: "missions",
-                    size: "4.9",
-                    date: "2023",
-                    resolution: "1920x1080",
-                    premium: false
-                },
-                {
-                    id: 5,
-                    src: "konni-logo.jpg",
-                    title: "Логотип 'Группы Конни'",
-                    description: "Эмблема частной военной компании 'Группы Конни', возглавляемой Макаровым.",
-                    category: "symbols",
-                    size: "2.4",
-                    date: "2023",
-                    resolution: "1080x1080",
-                    premium: false
-                }
-            ];
-
+                    const galleryImages = [
+    {
+        id: 1,
+        src: "makarov1.jpg",
+        title: "Владимир Макаров | Портрет",
+        description: "Владимир Макаров - главный антагонист Call of Duty: Modern Warfare III. Лидер ультранационалистов.",
+        category: "character",
+        size: "5.2",
+        date: "2023",
+        resolution: "1920x1080",
+        premium: true
+    },
+    {
+        id: 2,
+        src: "makarov2.jpg",
+        title: "Командир 'Группы Конни'",
+        description: "Макаров в роли командира частной военной компании 'Группы Конни'.",
+        category: "character",
+        size: "4.8",
+        date: "2023",
+        resolution: "1920x1080",
+        premium: false
+    },
+    {
+        id: 3,
+        src: "makarov3.jpg",
+        title: "Макаров в тюрьме 'Зордая'",
+        description: "Изображение Макарова во время заключения в тюремном комплексе.",
+        category: "character",
+        size: "5.1",
+        date: "2023",
+        resolution: "1920x1080",
+        premium: true
+    },
+    {
+        id: 4,
+        src: "makarov4.jpg",
+        title: "Тактический командир",
+        description: "Макаров в тактическом обмундировании, готовый к операции.",
+        category: "missions",
+        size: "4.9",
+        date: "2023",
+        resolution: "1920x1080",
+        premium: false
+    },
+    {
+        id: 5,
+        src: "makarov5.jpg",
+        title: "Макаров | Новый образ",
+        description: "Владимир Макаров в новом тактическом снаряжении.",
+        category: "character",
+        size: "5.0",
+        date: "2023",
+        resolution: "1920x1080",
+        premium: false
+    },
+    {
+        id: 6,
+        src: "makarov6.jpg",
+        title: "Макаров | Операция",
+        description: "Макаров во время выполнения боевой операции.",
+        category: "missions",
+        size: "5.3",
+        date: "2023",
+        resolution: "1920x1080",
+        premium: true
+    },
+    {
+        id: 7,
+        src: "makarov7.jpg",
+        title: "Макаров | Командир",
+        description: "Владимир Макаров отдает приказы своим бойцам.",
+        category: "character",
+        size: "4.7",
+        date: "2023",
+        resolution: "1920x1080",
+        premium: false
+    },
+    {
+        id: 8,
+        src: "konni-logo.jpg",
+        title: "Логотип 'Группы Конни'",
+        description: "Эмблема частной военной компании 'Группы Конни', возглавляемой Макаровым.",
+        category: "symbols",
+        size: "2.4",
+        date: "2023",
+        resolution: "1080x1080",
+        premium: false
+    }
+];
             // Настройки пагинации
             const itemsPerPage = 6;
             let currentPage = 1;
@@ -1366,3 +1399,4 @@
     </script>
 </body>
 </html>
+
